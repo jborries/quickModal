@@ -1,0 +1,46 @@
+<div class="modal fade" id="AccountEditModal" tabindex="-1" role="dialog" aria-labelledby="AccountEditModalLabel">
+    <div class="modal-dialog modalAccountEdit" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h3><strong>Edit Account Profile - <span class="accountname"></span></strong></h3>
+            </div>
+
+            <div class="modal-body">
+                <div id="formContent">
+                    @Html.Partial("_AccountProfileEdit", new GEDCPatientPortal.Models.AccountProfileEditViewModel())
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <script>
+        $(document).ready(function () {
+
+            $('#AccountEditModal').on('shown.bs.modal', function () {
+                $('#myInput').focus()
+            })
+
+
+
+        $("#AccountEditModal").on("submit", "#form-accountprofileedit", function (e) {
+            e.preventDefault();  // prevent standard form submission
+
+            var form = $(this);
+            $.ajax({
+                url: form.attr("action"),
+                method: form.attr("method"),  // post
+                data: form.serialize(),
+                success: function (partialResult) {
+                    $("#formContent").html(partialResult);
+                }
+            });
+        });
+
+
+        });
+
+    </script>
+}
