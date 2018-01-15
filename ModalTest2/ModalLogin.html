@@ -17,13 +17,20 @@
 
     #modalDialogHeaderBox{
       position: absolute;
-      height: 100px;
+      height: 125px;
       background-color: #F4F4F4;
       width: auto;
       margin-left: -1em;
-      margin-right: -1em;
-      padding-left: -.2em;
-      padding-right: -.2em;
+      margin-top: -.5em;
+    }
+
+    .closeButton{
+      background-position: 50px 100px;
+    }
+
+    .modalDialogHeaderBoxStripe{
+      height: 7px;
+      background-color: red;
     }
 
     .modalDialogHeaderText{
@@ -36,23 +43,29 @@
       padding-top: 20px;
     }
 
+    #ui-dialog {
+      padding: 0px;
+      outline: 0px;
+    }
+
     #name{
     margin-top: 150px;
     padding: 0px 20px;
     padding: 10px;
+    border: 1px solid #c5c5c5;
     }
 
     #password{
     margin-top: 20px;
-
     padding: 10px;
+    border: 1px solid #c5c5c5;
     }
 
     .inputPlaceholder::-webkit-input-placeholder {
       color: #ABABAB;
     }
 
-    .ui-dialog .ui-state-error { padding: .3em; }
+    .ui-dialog .ui-state-error { padding: 3em; }
 
     .validateTips {
       border: 1px solid transparent;
@@ -84,6 +97,7 @@
       border-style: none;
       width: 100%;
       text-decoration-line: none;
+      border-radius: 3px;
     }
 
     #modalForgotPassword{
@@ -115,6 +129,48 @@
       margin-top: 30px;
       font-size: 16px;
     }
+
+
+    .ui-dialog-titlebar {
+      visibility: hidden;
+    }
+
+
+    .ui-dialog .ui-dialog-titlebar-close{
+      visibility: visible;
+    }
+
+    /*Overrides native jquery title bar and escape X*/
+    /*.ui-dialog .ui-dialog-titlebar{
+      background: rgba(255, 0, 0, 0.4);
+      opacity: 0.9;
+      border: none;
+    }*/
+/*
+    .ui-dialog-titlebar{
+      visibility: hidden;
+    }
+    */
+
+/*
+    .ui-dialog .ui-dialog-titlebar-close{
+      visibility: visible;
+    }
+*/
+
+    .ui-widget-content{
+      border:none;
+    }
+
+    .ui-widget.ui-widget-content{
+      border: none;
+    }
+
+    .ui-dialog .ui-dialog-content{
+      border: 1px solid black;
+      border-radius: 3px;
+    }
+
 
   </style>
   <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
@@ -217,25 +273,25 @@
      $("input").addClass("inputPlaceholder");
 
      $(document).ready(function () {
-                 var modalBorder = document.getElementsByClassName (".ui-widget.ui-widget-content");
-                // var dropdownButton = document.getElementById("divProductsDropDown");
-                // var dropdownLink = document.getElementById("productsDropdownLink");
-
-                // dropdown.style.display = "block";
-                // dropdownButton.className = dropdownButton.className.replace("headerBottomNavigationDropDown", "") + " productsDropdownButtonActive";
-                 console.log(modalBorder);
+                //Overrides native jQuery padding for modals. Need to include [0] since it is pulling an array.
+                var uiDialogPadding = document.getElementsByClassName ("ui-dialog ui-corner-all ui-widget ui-widget-content ui-front ui-draggable ui-resizable")[0];
+                uiDialogPadding.style.padding = "0px";
+                console.log(uiDialogPadding);
              });
-
    } );
    </script>
  </head>
  <body>
 
- <div id="dialog-form" title="Create new user">
+ <div id="dialog-form" >
   <!-- <p class="validateTips">To submit your tax exemption certificate, you will need to login or register for an account.</p>
   -->
+
   <div id="modalDialogHeaderBox">
+
+    <div class="modalDialogHeaderBoxStripe"></div>
   <p class="modalDialogHeaderText">To submit your tax exemption certificate, you will need to login or register for an account.</p>
+
 </div>
    <form>
      <fieldset>
